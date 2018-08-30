@@ -5,6 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 require("./models/User");
+require("./models/Item");
 
 app.use(bodyParser.json());
 
