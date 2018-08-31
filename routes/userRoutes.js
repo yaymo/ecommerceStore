@@ -8,10 +8,10 @@ module.exports = app => {
   });
 
   app.post("/api/users", async (req, res) => {
-    const { name, email, password, isAdmin } = req.body;
-
+    const { firstName, lastName, email, password, isAdmin } = req.body;
     const user = new User({
-      name: { firstName: name.firstName, lastName: name.lastName },
+      firstName,
+      lastName,
       email,
       password,
       isAdmin
