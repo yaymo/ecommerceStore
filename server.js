@@ -6,7 +6,10 @@ const keys = require("./config/keys");
 const app = express();
 app.use(bodyParser.json());
 
-mongoose.connect(keys.mongoURI);
+mongoose.connect(
+  keys.mongoURI,
+  { useNewUrlParser: true }
+);
 
 require("./models/User");
 require("./models/Item");
