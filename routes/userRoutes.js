@@ -11,12 +11,14 @@ module.exports = app => {
     }
   });
 
-  app.get("/api/users", async (req, res) => {
-    const users = await User.find({});
+  app.post("/api/users", async (req, res) => {
+    const { searchParams } = req.body;
+    console.log("--------here--------", searchParams);
+    const users = await User.find(searchParams);
     res.status(200).send(users);
   });
 
-  app.post("/api/users", async (req, res) => {
+  app.post("/api/users/new", async (req, res) => {
     const { firstName, lastName, email, password, isAdmin } = req.body;
     const user = new User({
       firstName,
