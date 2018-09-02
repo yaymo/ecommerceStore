@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("users");
+const requireAdmin = require("../middlewares/requireAdmin");
 
 module.exports = app => {
-  app.get("/api/users/:id", async (req, res) => {
+  app.get("/api/users/:id", requireAdmin, async (req, res) => {
     try {
       const user = await User.findById(req.params.id);
       res.status(200).send(user);
@@ -11,14 +12,13 @@ module.exports = app => {
     }
   });
 
-  app.post("/api/users", async (req, res) => {
+  app.post("/api/users", requireAdmin, async (req, res) => {
     const { searchParams } = req.body;
-    console.log("--------here--------", searchParams);
     const users = await User.find(searchParams);
     res.status(200).send(users);
   });
 
-  app.post("/api/users/new", async (req, res) => {
+  app.post("/api/users/new", requireAdmin, async (req, res) => {
     const { firstName, lastName, email, password, isAdmin } = req.body;
     const user = new User({
       firstName,
@@ -36,7 +36,7 @@ module.exports = app => {
     }
   });
 
-  app.delete("/api/users/:id", async (req, res) => {
+  app.delete("/api/users/:id", requireAdmin, async (req, res) => {
     try {
       await User.findByIdAndRemove({ _id: req.params.id }).exec();
       res.status(200).send({});
