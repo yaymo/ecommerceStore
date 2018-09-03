@@ -10,16 +10,6 @@ const userSchema = new Schema({
   isAdmin: { type: Boolean, required: true }
 });
 
-userSchema.methods.apiResp = user => {
-  return {
-    email: user.email,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    isAdmin: user.isAdmin,
-    _id: user._id
-  };
-};
-
 userSchema.methods.validatePassword = (password, hash) => {
   return bcrypt.compare(password, hash).then(isValid => isValid);
 };
