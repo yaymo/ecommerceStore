@@ -1,7 +1,7 @@
 module.exports = (req, res, next) => {
-  const { User } = req.body;
+  const { user } = req.body;
 
-  if (!(User && User.isAdmin)) {
+  if (!(user && user.isAdmin)) {
     return res.status(401).send({ error: "You must be an admin" });
   }
 
