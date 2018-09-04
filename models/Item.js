@@ -18,6 +18,7 @@ const ItemSchema = new Schema({
     lg: { type: Number, default: 0 },
     xl: { type: Number, default: 0 },
     xxl: { type: Number, default: 0 }
-  }
+  },
+  created: { type: Date, default: Date.now() }
 });
 mongoose.model("items", ItemSchema);
